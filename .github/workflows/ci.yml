@@ -11,60 +11,60 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - uses: pnpm/action-setup@v3
+            - uses: npm/action-setup@v3
               with:
                   version: 10
             - uses: actions/setup-node@v4
               with:
                   node-version: 20
-                  cache: pnpm
-            - run: pnpm install --frozen-lockfile
-            - run: pnpm lint
+                  cache: npm
+            - run: npm install --frozen-lockfile
+            - run: npm lint
 
     format:
         name: Format checks
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - uses: pnpm/action-setup@v3
+            - uses: npm/action-setup@v3
               with:
                   version: 10
             - uses: actions/setup-node@v4
               with:
                   node-version: 20
-                  cache: pnpm
-            - run: pnpm install --frozen-lockfile
-            - run: pnpm format --check
+                  cache: npm
+            - run: npm install --frozen-lockfile
+            - run: npm format --check
 
     typecheck:
         name: Typechecks
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - uses: pnpm/action-setup@v3
+            - uses: npm/action-setup@v3
               with:
                   version: 10
             - uses: actions/setup-node@v4
               with:
                   node-version: 20
-                  cache: pnpm
-            - run: pnpm install --frozen-lockfile
-            - run: pnpm typecheck
+                  cache: npm
+            - run: npm install --frozen-lockfile
+            - run: npm typecheck
 
     test:
         name: Unit Tests
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - uses: pnpm/action-setup@v3
+            - uses: npm/action-setup@v3
               with:
                   version: 10
             - uses: actions/setup-node@v4
               with:
                   node-version: 20
-                  cache: pnpm
-            - run: pnpm install --frozen-lockfile
-            - run: pnpm test:run
+                  cache: npm
+            - run: npm install --frozen-lockfile
+            - run: npm test:run
 
     build:
         name: Build
@@ -72,12 +72,12 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - uses: pnpm/action-setup@v3
+            - uses: npm/action-setup@v3
               with:
                   version: 10
             - uses: actions/setup-node@v4
               with:
                   node-version: 20
-                  cache: pnpm
-            - run: pnpm install --frozen-lockfile
-            - run: pnpm build
+                  cache: npm
+            - run: npm install --frozen-lockfile
+            - run: npm build
