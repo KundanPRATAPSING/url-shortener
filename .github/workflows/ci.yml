@@ -6,50 +6,78 @@ on:
         branches: [main]
 
 jobs:
-    checks:
-        name: Lint, Format, Typecheck, Tests
+    lint:
+        name: Lint check
         runs-on: ubuntu-latest
-
         steps:
             - uses: actions/checkout@v4
-
-            - name: Setup Node
-              uses: actions/setup-node@v4
+            - uses: pnpm/action-setup@v3
               with:
-                  node-version: 20
-                  cache: npm
+                  version: 9
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 18
+                  cache: pnpm
+            - run: pnpm install --frozen-lockfile
+            - run: pnpm lint
 
-            - name: Install dependencies
-              run: npm ci --include=optional
+    format:
+        name: Format checks
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v3
+              with:
+                  version: 9
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 18
+                  cache: pnpm
+            - run: pnpm install --frozen-lockfile
+            - run: pnpm format --check
 
-            - name: Lint
-              run: npm run lint
+    typecheck:
+        name: Typechecks
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v3
+              with:
+                  version: 9
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 18
+                  cache: pnpm
+            - run: pnpm install --frozen-lockfile
+            - run: pnpm typecheck
 
-            - name: Format check
-              run: npx prettier . --check
-
-            - name: Typecheck
-              run: npm run typecheck
-
-            - name: Unit tests
-              run: npm run test:run
+    test:
+        name: Unit Tests
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v3
+              with:
+                  version: 9
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 18
+                  cache: pnpm
+            - run: pnpm install --frozen-lockfile
+            - run: pnpm test:run
 
     build:
         name: Build
-        needs: checks
+        needs: [lint, format, typecheck, test]
         runs-on: ubuntu-latest
-
         steps:
             - uses: actions/checkout@v4
-
-            - name: Setup Node
-              uses: actions/setup-node@v4
+            - uses: pnpm/action-setup@v3
               with:
-                  node-version: 20
-                  cache: npm
-
-            - name: Install dependencies
-              run: npm ci --include=optional
-
-            - name: Build
-              run: npm run build
+                  version: 9
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 18
+                  cache: pnpm
+            - run: pnpm install --frozen-lockfile
+            - run: pnpm build
