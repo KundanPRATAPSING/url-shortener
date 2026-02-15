@@ -14,7 +14,7 @@
         "typecheck": "tsc -p . --noEmit"
     },
     "keywords": [],
-    "author": "Developer Riyansh",
+    "author": "Kundan Pratap Singh & Ankit Anand",
     "license": "ISC",
     "packageManager": "pnpm@10.28.0",
     "devDependencies": {
