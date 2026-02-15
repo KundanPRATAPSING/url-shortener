@@ -6,58 +6,50 @@ on:
         branches: [main]
 
 jobs:
-    lint:
+    checks:
+        name: Lint, Format, Typecheck, Tests
         runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
-              with:
-                  node-version: 20
-                  cache: npm
-            - run: npm ci
-            - run: npm run lint
 
-    format:
-        runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
-              with:
-                  node-version: 20
-                  cache: npm
-            - run: npm ci
-            - run: npx prettier . --check
 
-    typecheck:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
+            - name: Setup Node
+              uses: actions/setup-node@v4
               with:
                   node-version: 20
                   cache: npm
-            - run: npm ci
-            - run: npm run typecheck
 
-    test:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
-              with:
-                  node-version: 20
-                  cache: npm
-            - run: npm ci
-            - run: npm run test:run
+            - name: Install dependencies
+              run: npm ci --include=optional
+
+            - name: Lint
+              run: npm run lint
+
+            - name: Format check
+              run: npx prettier . --check
+
+            - name: Typecheck
+              run: npm run typecheck
+
+            - name: Unit tests
+              run: npm run test:run
 
     build:
-        needs: [lint, format, typecheck, test]
+        name: Build
+        needs: checks
         runs-on: ubuntu-latest
+
         steps:
             - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
               with:
                   node-version: 20
                   cache: npm
-            - run: npm ci
-            - run: npm run build
+
+            - name: Install dependencies
+              run: npm ci --include=optional
+
+            - name: Build
+              run: npm run build
