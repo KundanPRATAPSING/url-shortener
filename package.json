@@ -21,6 +21,7 @@
         "@eslint/js": "^9.39.2",
         "@types/express": "^5.0.6",
         "@types/node": "^25.2.1",
+        "@types/shortid": "^2.2.0",
         "@vitest/coverage-v8": "^4.0.18",
         "dotenv": "^17.2.4",
         "eslint": "^9.39.2",
