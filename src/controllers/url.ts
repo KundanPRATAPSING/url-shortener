@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import shortid from "shortid";
 import URL from "../models/url";
 
-// Service: create a short URL and return the generated id (no res handling)
+
 export async function createShortUrl(originalUrl: string): Promise<string> {
     const generatedId = typeof shortid.generate === 'function' ? shortid.generate() : shortid();
 
@@ -15,7 +15,7 @@ export async function createShortUrl(originalUrl: string): Promise<string> {
     return generatedId;
 }
 
-// Express handler: calls the service and sends the HTTP response
+
 export async function handleGenerateShortUrl(req: Request, res: Response) {
     try {
         const body = req.body;
