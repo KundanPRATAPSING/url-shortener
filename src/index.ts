@@ -12,7 +12,7 @@ app.use(express.json());
 // Routes
 app.use("/url", urlRouter);
 
-app.get('/:shortId', async (req: Request, res: Response): Promise<any> => {
+app.get('/:shortId', async (req: Request, res: Response) => {
     const shortId = req.params.shortId;
     
     // Find the entry and update the visit history
