@@ -19,7 +19,7 @@ export async function recordVisit(shortId: string) {
     { shortId },
     { $push: { visitHistory: { timestamp: Date.now() } } },
     { new: true }
-  );
+  );  //add this new item to the end of the array
 
   return entry;
 }
