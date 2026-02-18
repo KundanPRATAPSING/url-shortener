@@ -23,8 +23,8 @@ app.get('/:shortId', async (req: Request, res: Response) => {
         return res.status(404).json({ error: 'Short URL not found' });
     }
 
-    // Return redirect target instead of performing an HTTP redirect (API contract)
-    return res.json({ shortId: entry.shortId, redirectTo: entry.redirectUrl });
+    // Perform HTTP redirect to the original URL (browser flow)
+    return res.redirect(entry.redirectUrl);
 });
 
 // Database Connection & Server Start
