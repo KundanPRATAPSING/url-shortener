@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import express, { Application, Request, Response } from "express";
 import urlRouter from "./routes/url";
 import { connectToMongoDB } from "./connect";
@@ -48,3 +49,12 @@ startServer().catch(err => {
 });
 
 export default app;
+=======
+import express from "express";
+const app = express();
+const PORT = 8001;
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
+>>>>>>> 782aa79994a77bef2f879b2fdcebbc8ae4aa27b1
