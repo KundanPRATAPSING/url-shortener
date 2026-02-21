@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "build": "tsc",
-        "start": "tsx src/index.ts",
+        "start": "node dist/server.js",
         "test": "vitest",
         "test:run": "vitest run",
         "test:coverage": "vitest run --coverage",
@@ -21,7 +21,6 @@
         "@eslint/js": "^9.39.2",
         "@types/express": "^5.0.6",
         "@types/node": "^25.2.1",
-        "@types/shortid": "^2.2.0",
         "@vitest/coverage-v8": "^4.0.18",
         "dotenv": "^17.2.4",
         "eslint": "^9.39.2",
@@ -33,9 +32,5 @@
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.54.0",
         "vitest": "^4.0.18"
-    },
-    "dependencies": {
-        "mongoose": "^9.2.1",
-        "shortid": "^2.2.17"
     }
 }
