@@ -1,5 +1,8 @@
-import { Request, Response } from 'express';
-import { createShortUrl as svcCreateShortUrl, getAnalytics as svcGetAnalytics } from '../services/urlService';
+import { Request, Response } from "express";
+import {
+    createShortUrl as svcCreateShortUrl,
+    getAnalytics as svcGetAnalytics,
+} from "../services/urlService";
 
 // Express handler: calls the service and sends the HTTP response
 export async function handleGenerateShortUrl(req: Request, res: Response) {
@@ -14,8 +17,8 @@ export async function handleGenerateShortUrl(req: Request, res: Response) {
 
         return res.json({ id: generatedId });
     } catch (err) {
-        console.error('Error generating short url', err);
-        return res.status(500).json({ error: 'Internal server error' });
+        console.error("Error generating short url", err);
+        return res.status(500).json({ error: "Internal server error" });
     }
 }
 
@@ -24,10 +27,11 @@ export async function handleGetAnalytics(req: Request, res: Response) {
     try {
         const shortId = String(req.params.shortId);
         const result = await svcGetAnalytics(shortId);
-        if (!result) return res.status(404).json({ error: 'Short URL not found' });
+        if (!result)
+            return res.status(404).json({ error: "Short URL not found" });
         return res.json(result);
     } catch (err) {
-        console.error('Error fetching analytics', err);
-        return res.status(500).json({ error: 'Internal server error' });
+        console.error("Error fetching analytics", err);
+        return res.status(500).json({ error: "Internal server error" });
     }
 }

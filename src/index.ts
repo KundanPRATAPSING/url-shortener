@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import express, { Application, Request, Response } from "express";
 import urlRouter from "./routes/url";
 import { connectToMongoDB } from "./connect";
@@ -12,16 +11,16 @@ app.use(express.json());
 // Routes
 app.use("/url", urlRouter);
 
-import { recordVisit } from './services/urlService';
+import { recordVisit } from "./services/urlService";
 
-app.get('/:shortId', async (req: Request, res: Response) => {
+app.get("/:shortId", async (req: Request, res: Response) => {
     const shortId = String(req.params.shortId);
 
     // Delegate DB logic to service layer
     const entry = await recordVisit(shortId);
 
     if (!entry) {
-        return res.status(404).json({ error: 'Short URL not found' });
+        return res.status(404).json({ error: "Short URL not found" });
     }
 
     // Perform HTTP redirect to the original URL (browser flow)
@@ -43,18 +42,9 @@ async function startServer() {
     }
 }
 
-startServer().catch(err => {
-    console.error('Failed to start server', err);
+startServer().catch((err) => {
+    console.error("Failed to start server", err);
     process.exit(1);
 });
 
 export default app;
-=======
-import express from "express";
-const app = express();
-const PORT = 8001;
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
->>>>>>> 782aa79994a77bef2f879b2fdcebbc8ae4aa27b1
